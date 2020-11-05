@@ -1,0 +1,22 @@
+{
+  "name": "jspatterncli",
+  "version": "1.0.0",
+  "description": "JS command-line interface for code test",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timjoug/jspatterncli.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timjoug/jspatterncli/issues"
+  },
+  "homepage": "https://github.com/timjoug/jspatterncli#readme",
+  "dependencies": {
+    "jest": "^26.6.3"
+  }
+}
