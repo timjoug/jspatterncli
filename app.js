@@ -1,6 +1,6 @@
 const data = require('./data');
 
-const objToCheck = data.data;
+const dataArray = data.data;
 
 /**
  * This function will check the arguments passed when the file is executed.
@@ -8,20 +8,24 @@ const objToCheck = data.data;
  * This function is directly called when the file is executed with a node command.
  */
 function routingFunction() {
-    let finalRes = objToCheck,
-        filterStr,
+    let finalRes = dataArray,
+        filterStr = [],
         filterBool = false,
         countBool = false;
     process.argv.forEach(elt => {
         if (elt.includes('--filter=')) {
-            filterStr = elt.substring(9);
+            filterStr.push(elt.substring(9));
             filterBool = true;
         }
         if (elt.includes('--count')) {
             countBool = true;
         }
     });
-    if (filterBool === true) { finalRes = filteredResult(finalRes, filterStr); }
+    if (filterBool === true) {
+        filterStr.forEach(process => {
+            finalRes = filteredResult(finalRes, process);
+        })
+    }
     if (countBool === true) { finalRes = countResult(finalRes); }
     return finalRes;
 }
@@ -31,6 +35,7 @@ function routingFunction() {
  * @param {String} array - Array of Object to filter
  * @param {String} filterStr - Substring to check
  */
+
 function filteredResult(array, filterStr) {
     let filteredArray = array.filter(e => e.people.some(f => f.animals.some(g => g.name.includes(filterStr))));
 
@@ -39,9 +44,9 @@ function filteredResult(array, filterStr) {
         let filteredPeople = elt.people.filter(e => e.animals.some(f => f.name.includes(filterStr)));
         elt.people = filteredPeople;
 
-        filteredPeople.forEach(relt => {
-            let filterAnimals = relt.animals.filter(e => e.name.includes(filterStr));
-            relt.animals = filterAnimals
+        filteredPeople.forEach(eltBis => {
+            let filterAnimals = eltBis.animals.filter(e => e.name.includes(filterStr));
+            eltBis.animals = filterAnimals
         })
 
     })
@@ -56,8 +61,8 @@ function filteredResult(array, filterStr) {
 function countResult(array) {
     array.forEach(elt => {
         elt.name = elt.name.concat(' [', elt.people.length, ']');
-        elt.people.forEach(relt => {
-            relt.name = relt.name.concat(' [', relt.animals.length, ']');
+        elt.people.forEach(eltBis => {
+            eltBis.name = eltBis.name.concat(' [', eltBis.animals.length, ']');
         })
     })
     return array;
