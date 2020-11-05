@@ -1,7 +1,9 @@
 const mock = require('./mock'),
     data = require('./data');
 
-const strToCheck = mock.mock;
+// const strToCheck = mock.mock;
+const arrayToCheck = mock.mock;
+
 const objToCheck = data;
 
 /**
@@ -15,7 +17,6 @@ function routingFunction() {
         if (strFilter('--filter=', elt)) {
             filterStr = elt.substring(9);
             finalRes = filteredResult(filterStr);
-            if (finalRes === '') { finalRes = 'No data matching' }
         }
     });
     return finalRes;
@@ -45,9 +46,12 @@ function strFilter(filterStr, checkStr) {
  * @param {String} filterStr - Substring to check
  */
 function filteredResult(filterStr) {
-    let res = '';
-    let testRes = strFilter(filterStr, strToCheck);
-    if (testRes === true) { res += strToCheck };
+    let res = [],
+        testRes;
+    arrayToCheck.forEach(elt => {
+        testRes = strFilter(filterStr, elt.name);
+        if (testRes === true) { res.push(elt) };
+    });
     return res;
 }
 

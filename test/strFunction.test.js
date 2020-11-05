@@ -23,13 +23,29 @@ test('If the check and/or the filter value set is not a string, the variables wi
 });
 
 // Function filteredResult()
-test('If the filter in entry of the function works, the function will return the mock string ', () => {
+test('If the filter in entry of the function works with all the different objects of the mock, the function will return the mock string ', () => {
     const input = 'test'
 
-    expect(app.filteredResult(input)).toBe('Onestringtotestwithafiltercli');
+    const output = [
+        { name: 'One test' },
+        { name: 'Another test' },
+        { name: 'One more test' }
+    ]
+
+    expect(app.filteredResult(input)).toStrictEqual(output);
 });
-test('If the filter in entry of the function doesn t work, the function will return a an empty string', () => {
+test('If the filter in entry of the function works with at least one of the different objects of the mock, the function will return a custom object', () => {
+    const input = 'One'
+
+    const output = [
+        { name: 'One test' },
+        { name: 'One more test' }
+    ]
+
+    expect(app.filteredResult(input)).toStrictEqual(output);
+});
+test('If the filter in entry of the function doesn t work with any of the different objects of the mock, the function will return an empty string', () => {
     const input = 'tset'
 
-    expect(app.filteredResult(input)).toBe('');
+    expect(app.filteredResult(input)).toStrictEqual([]);
 });
