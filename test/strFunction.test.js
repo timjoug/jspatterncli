@@ -1,5 +1,9 @@
 const data = require('../data');
-const app = require('./../app')
+
+const app = require('./../app');
+const dataHandling = require('./../scripts/dataHandling')
+    // const manageArgs = require('./../scripts/manageArgs')
+
 const dataTest = data.data;
 
 // Function filteredResult(array, filterStr)
@@ -29,7 +33,7 @@ test('If the filter in entry of the function works with at least one of the diff
         }
     ]
 
-    expect(app.filteredResult(input.array, input.filterStr)).toStrictEqual(output);
+    expect(dataHandling.filteredResult(input.array, input.filterStr)).toStrictEqual(output);
 });
 test('If the filter in entry of the function doesn t work with any of the different objects of the mock, the function will return an empty string', () => {
     const input = {
@@ -37,7 +41,7 @@ test('If the filter in entry of the function doesn t work with any of the differ
         filterStr: 'test'
     }
 
-    expect(app.filteredResult(input.array, input.filterStr)).toStrictEqual([]);
+    expect(dataHandling.filteredResult(input.array, input.filterStr)).toStrictEqual([]);
 });
 
 // Function countResult(array)
@@ -94,6 +98,5 @@ test('With an array, following a define schema, the function will displays the s
         ]
     }]
 
-
-    expect(app.countResult(input)).toStrictEqual(output);
+    expect(dataHandling.countResult(input)).toStrictEqual(output);
 });
