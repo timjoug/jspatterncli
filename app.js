@@ -1,10 +1,6 @@
-const mock = require('./mock'),
-    data = require('./data');
+const data = require('./data');
 
-// const strToCheck = mock.mock;
-const arrayToCheck = mock.mock;
-
-const objToCheck = data;
+const objToCheck = data.data;
 
 /**
  * This function will check the arguments passed when the file is executed.
@@ -14,52 +10,41 @@ const objToCheck = data;
 function routingFunction() {
     let finalRes, filterStr;
     process.argv.forEach(elt => {
-        if (strFilter('--filter=', elt)) {
+        if (elt.includes('--filter=')) {
             filterStr = elt.substring(9);
-            finalRes = filteredResult(filterStr);
+            finalRes = filteredResult(objToCheck, filterStr);
         }
     });
     return finalRes;
 }
 
 /**
- * This function checks if a target string includes a substring and will return a boolean.
+ * This function will generates the result, filtered with an filter input and the target to filter.
+ * @param {String} array - Array of Object to filter
  * @param {String} filterStr - Substring to check
- * @param {String} checkStr - String to analyse
  */
-function strFilter(filterStr, checkStr) {
-    if (typeof filterStr !== 'string') {
-        filterStr = filterStr.toString();
-    }
-    if (typeof checkStr !== 'string') {
-        checkStr = checkStr.toString();
-    }
-    if (checkStr.includes(filterStr)) {
-        return true;
-    } else {
-        return false;
-    }
-}
+function filteredResult(array, filterStr) {
+    let filteredArray = array.filter(e => e.people.some(f => f.animals.some(g => g.name.includes(filterStr))));
 
-/**
- * This function will generates the result, filtered with an filter input.
- * @param {String} filterStr - Substring to check
- */
-function filteredResult(filterStr) {
-    let res = [],
-        testRes;
-    arrayToCheck.forEach(elt => {
-        testRes = strFilter(filterStr, elt.name);
-        if (testRes === true) { res.push(elt) };
-    });
-    return res;
+    filteredArray.forEach(elt => {
+
+        let filteredPeople = elt.people.filter(e => e.animals.some(f => f.name.includes(filterStr)));
+        elt.people = filteredPeople;
+
+        filteredPeople.forEach(relt => {
+            let filterAnimals = relt.animals.filter(e => e.name.includes(filterStr));
+            relt.animals = filterAnimals
+        })
+
+    })
+
+    return filteredArray
 }
 
 const result = routingFunction();
-console.log(result);
+console.log(JSON.stringify(result));
 
 module.exports = {
     routingFunction,
-    strFilter,
     filteredResult
 }
