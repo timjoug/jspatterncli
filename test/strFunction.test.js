@@ -1,16 +1,14 @@
 const data = require('../data');
 
-const app = require('./../app');
-const dataHandling = require('./../scripts/dataHandling')
-    // const manageArgs = require('./../scripts/manageArgs')
+const dataHandling = require('./../scripts/dataHandling');
 
 const dataTest = data.data;
 
-// Function filteredResult(array, filterStr)
+// Function arrayFiltering(arrayToFilter, filterString)
 test('If the filter in entry of the function works with at least one of the different objects of the mock, the function will return a custom object', () => {
     const input = {
-        array: dataTest,
-        filterStr: 'ry'
+        arrayToFilter: dataTest,
+        filterString: 'ry'
     }
 
     const output = [{
@@ -33,19 +31,19 @@ test('If the filter in entry of the function works with at least one of the diff
         }
     ]
 
-    expect(dataHandling.filteredResult(input.array, input.filterStr)).toStrictEqual(output);
+    expect(dataHandling.arrayFiltering(input.arrayToFilter, input.filterString)).toStrictEqual(output);
 });
 test('If the filter in entry of the function doesn t work with any of the different objects of the mock, the function will return an empty string', () => {
     const input = {
-        array: dataTest,
-        filterStr: 'test'
+        arrayToFilter: dataTest,
+        filterString: 'test'
     }
 
-    expect(dataHandling.filteredResult(input.array, input.filterStr)).toStrictEqual([]);
+    expect(dataHandling.arrayFiltering(input.arrayToFilter, input.filterString)).toStrictEqual([]);
 });
 
-// Function countResult(array)
-test('With an array, following a define schema, the function will displays the same array with the count of chlidren in the "name" field', () => {
+// Function childrenCount(arrayToAnalyze)
+test('With an array, following a define schema, the function will display the same array with the count of chlidren in the "name" field', () => {
     const input = [{
         name: 'Satanwi',
         people: [{
@@ -98,5 +96,5 @@ test('With an array, following a define schema, the function will displays the s
         ]
     }]
 
-    expect(dataHandling.countResult(input)).toStrictEqual(output);
+    expect(dataHandling.childrenCount(input)).toStrictEqual(output);
 });

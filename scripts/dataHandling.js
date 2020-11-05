@@ -1,20 +1,20 @@
 /**
  * This function will generate the result, filtered with an filter input and the target to filter.
- * @param {String} array - Array of Object to filter
- * @param {String} filterStr - Substring to check
+ * @param {String} arrayToFilter - Array of Object to filter
+ * @param {String} filterString - Substring to check
  */
 
-function filteredResult(array, filterStr) {
-    let filteredArray = array.filter(e => e.people.some(f => f.animals.some(g => g.name.includes(filterStr))));
+function arrayFiltering(arrayToFilter, filterString) {
+    let filteredArray = arrayToFilter.filter(country => country.people.some(people => people.animals.some(animal => animal.name.includes(filterString))));
 
-    filteredArray.forEach(elt => {
+    filteredArray.forEach(country => {
 
-        let filteredPeople = elt.people.filter(e => e.animals.some(f => f.name.includes(filterStr)));
-        elt.people = filteredPeople;
+        let filteredPeople = country.people.filter(people => people.animals.some(animal => animal.name.includes(filterString)));
+        country.people = filteredPeople;
 
-        filteredPeople.forEach(eltBis => {
-            let filterAnimals = eltBis.animals.filter(e => e.name.includes(filterStr));
-            eltBis.animals = filterAnimals
+        filteredPeople.forEach(people => {
+            let filteredAnimals = people.animals.filter(animal => animal.name.includes(filterString));
+            people.animals = filteredAnimals;
         })
 
     })
@@ -24,19 +24,19 @@ function filteredResult(array, filterStr) {
 
 /**
  * This function will add the count of the differents children arrays of the targeted array.
- * @param {String} array - Array of Object to count
+ * @param {String} arrayToAnalyze - Array of Object to count
  */
-function countResult(array) {
-    array.forEach(elt => {
-        elt.name = elt.name.concat(' [', elt.people.length, ']');
-        elt.people.forEach(eltBis => {
-            eltBis.name = eltBis.name.concat(' [', eltBis.animals.length, ']');
+function childrenCount(arrayToAnalyze) {
+    arrayToAnalyze.forEach(country => {
+        country.name = country.name.concat(' [', country.people.length, ']');
+        country.people.forEach(people => {
+            people.name = people.name.concat(' [', people.animals.length, ']');
         })
     })
-    return array;
+    return arrayToAnalyze;
 }
 
 module.exports = {
-    countResult,
-    filteredResult
+    childrenCount,
+    arrayFiltering
 }

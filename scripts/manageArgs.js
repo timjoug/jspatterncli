@@ -1,34 +1,33 @@
 const dataHandling = require('./dataHandling')
 
 /**
- * This function will check the arguments passed when the file is executed.
- * Respecting the existing argument, linked functions are executed.
- * This function is directly called when the file is executed with a node command.
+ * This function will check the arguments passed during the execution and will execute the targeted function.
  * @param {Array} dataToAnalyze - Array of data to analyze
+ * @param {Array} argumentList - List of the arguments, passed during the app.js execution
  */
-function routingFunction(dataToAnalyze) {
-    let finalRes = dataToAnalyze,
-        filterStr = [],
-        filterBool = false,
-        countBool = false;
-    process.argv.forEach(elt => {
-        if (elt.includes('--filter=')) {
-            filterStr.push(elt.substring(9));
-            filterBool = true;
+function functionRouter(dataToAnalyze, argumentList) {
+    let result = dataToAnalyze,
+        filterString = [],
+        filterBoolean = false,
+        countBoolean = false;
+    argumentList.forEach(argument => {
+        if (argument.includes('--filter=')) {
+            filterString.push(argument.substring(9));
+            filterBoolean = true;
         }
-        if (elt.includes('--count')) {
-            countBool = true;
+        if (argument.includes('--count')) {
+            countBoolean = true;
         }
     });
-    if (filterBool === true) {
-        filterStr.forEach(process => {
-            finalRes = dataHandling.filteredResult(finalRes, process);
+    if (filterBoolean === true) {
+        filterString.forEach(process => {
+            result = dataHandling.arrayFiltering(result, process);
         })
     }
-    if (countBool === true) { finalRes = dataHandling.countResult(finalRes); }
-    return finalRes;
+    if (countBoolean === true) { result = dataHandling.childrenCount(result); }
+    return result;
 }
 
 module.exports = {
-    routingFunction
+    functionRouter
 }
