@@ -39,3 +39,61 @@ test('If the filter in entry of the function doesn t work with any of the differ
 
     expect(app.filteredResult(input.array, input.filterStr)).toStrictEqual([]);
 });
+
+// Function countResult(array)
+test('With an array, following a define schema, the function will displays the same array with the count of chlidren in the "name" field', () => {
+    const input = [{
+        name: 'Satanwi',
+        people: [{
+                name: 'Elmer Kinoshita',
+                animals: [
+                    { name: 'Wrysel' }
+                ]
+            },
+            {
+                name: 'Cora Howell',
+                animals: [
+                    { name: 'Rrya' },
+                    { name: 'Pronryorn' }
+                ]
+            },
+            {
+                name: 'Anthony Bruno',
+                animals: [
+                    { name: 'Caryxcal' },
+                    { name: 'Tryantula' },
+                    { name: 'Oryx' }
+                ]
+            }
+        ]
+    }]
+
+    const output = [{
+        name: 'Satanwi [3]',
+        people: [{
+                name: 'Elmer Kinoshita [1]',
+                animals: [
+                    { name: 'Wrysel' }
+                ]
+            },
+            {
+                name: 'Cora Howell [2]',
+                animals: [
+                    { name: 'Rrya' },
+                    { name: 'Pronryorn' }
+                ]
+            },
+            {
+                name: 'Anthony Bruno [3]',
+                animals: [
+                    { name: 'Caryxcal' },
+                    { name: 'Tryantula' },
+                    { name: 'Oryx' }
+                ]
+            }
+        ]
+    }]
+
+
+    expect(app.countResult(input)).toStrictEqual(output);
+});

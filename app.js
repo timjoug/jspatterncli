@@ -8,18 +8,26 @@ const objToCheck = data.data;
  * This function is directly called when the file is executed with a node command.
  */
 function routingFunction() {
-    let finalRes, filterStr;
+    let finalRes = objToCheck,
+        filterStr,
+        filterBool = false,
+        countBool = false;
     process.argv.forEach(elt => {
         if (elt.includes('--filter=')) {
             filterStr = elt.substring(9);
-            finalRes = filteredResult(objToCheck, filterStr);
+            filterBool = true;
+        }
+        if (elt.includes('--count')) {
+            countBool = true;
         }
     });
+    if (filterBool === true) { finalRes = filteredResult(finalRes, filterStr); }
+    if (countBool === true) { finalRes = countResult(finalRes); }
     return finalRes;
 }
 
 /**
- * This function will generates the result, filtered with an filter input and the target to filter.
+ * This function will generate the result, filtered with an filter input and the target to filter.
  * @param {String} array - Array of Object to filter
  * @param {String} filterStr - Substring to check
  */
@@ -41,10 +49,25 @@ function filteredResult(array, filterStr) {
     return filteredArray
 }
 
+/**
+ * This function will add the count of the differents children arrays of the targeted array.
+ * @param {String} array - Array of Object to count
+ */
+function countResult(array) {
+    array.forEach(elt => {
+        elt.name = elt.name.concat(' [', elt.people.length, ']');
+        elt.people.forEach(relt => {
+            relt.name = relt.name.concat(' [', relt.animals.length, ']');
+        })
+    })
+    return array;
+}
+
 const result = routingFunction();
 console.log(JSON.stringify(result));
 
 module.exports = {
     routingFunction,
-    filteredResult
+    filteredResult,
+    countResult
 }
