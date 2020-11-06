@@ -1,8 +1,8 @@
-const data = require('../data');
+const { data } = require('../data');
 
 const dataHandling = require('./../scripts/dataHandling');
 
-const dataTest = data.data;
+const dataTest = data;
 
 // Function filterAnimalsByNames(animals, nameList)
 test('If the filter in entry of the function works with at least one of the different objects of the mock, the function will return a custom object', () => {

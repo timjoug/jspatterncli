@@ -4,7 +4,7 @@
     "description": "JS command-line interface for code test",
     "main": "app.js",
     "scripts": {
-        "test": "jest"
+        "test": "jest --coverage"
     },
     "repository": {
         "type": "git",

@@ -1,5 +1,3 @@
-const data = require('../data');
-
 const manageArgs = require('./../scripts/manageArgs');
 
 // Function parseArgs(argumentList)
