@@ -1,7 +1,7 @@
 const manageArgs = require('./../scripts/manageArgs');
 
 // Function parseArgs(argumentList)
-test('With an empty argument list, the function will return an object with an empty nameFilters and a false count', () => {
+test('Given the argument list is empty, when we parse this list, the output list will be equal to an empty filter list and a false boolean, included in an object', () => {
     const input = []
 
     const output = { nameFilters: [], count: false }
@@ -9,7 +9,7 @@ test('With an empty argument list, the function will return an object with an em
     expect(manageArgs.parseArgs(input)).toStrictEqual(output);
 });
 
-test('With a single filter argument (--filter=ry), the function will return an array, filtered with the input string (ry)', () => {
+test('Given the argument list contains a filter argument but no count argument, when we parse this list, the output list will be equal to a list with one filter and a false boolean, included in an object', () => {
     const input = ['node', 'app.js', '--filter=ry']
 
     const output = { nameFilters: ['ry'], count: false }
@@ -17,7 +17,7 @@ test('With a single filter argument (--filter=ry), the function will return an a
     expect(manageArgs.parseArgs(input)).toStrictEqual(output);
 });
 
-test('With two filter arguments (--filter=ry and --filter=Do), the function will return an array, filtered with the input strings (ry and Do)', () => {
+test('Given the argument list contains two filter arguments but no count argument, when we parse this list, the output list will be equal to a list with two filters and a false boolean, included in an object', () => {
     const input = ['node', 'app.js', '--filter=ry', '--filter=Do']
 
     const output = { nameFilters: ['ry', 'Do'], count: false }
@@ -25,7 +25,7 @@ test('With two filter arguments (--filter=ry and --filter=Do), the function will
     expect(manageArgs.parseArgs(input)).toStrictEqual(output);
 });
 
-test('With a single filter argument (--filter=ry) and a count argument, the function will return an array, filtered with the input string (ry). This array will also include the count of children', () => {
+test('Given the argument list contains a filter argument and a count argument, when we parse this list, the output list will be equal to a list with one filter and a true boolean, included in an object', () => {
     const input = ['node', 'app.js', '--filter=ry', '--count']
 
     const output = { nameFilters: ['ry'], count: true }

@@ -2,12 +2,21 @@ const { data } = require('../data');
 
 const dataHandling = require('./../scripts/dataHandling');
 
-const dataTest = data;
-
 // Function filterAnimalsByNames(animals, nameList)
-test('If the filter in entry of the function works with at least one of the different objects of the mock, the function will return a custom object', () => {
+test('Given the nameList is empty, when we filter "animals" with nameList, the output list will be equal to "animals"', () => {
     const input = {
-        animals: dataTest,
+        dataList: [...data],
+        nameList: []
+    }
+
+    const output = [...data]
+
+    expect(dataHandling.filterAnimalsByNames(input.dataList, input.nameList)).toStrictEqual(output);
+});
+
+test('Given the nameList has one matching filter, when we filter "animals" with nameList, the output list will be equal to a filtered "animals" list', () => {
+    const input = {
+        dataList: [...data],
         nameList: ['ry']
     }
 
@@ -31,12 +40,12 @@ test('If the filter in entry of the function works with at least one of the diff
         }
     ]
 
-    expect(dataHandling.filterAnimalsByNames(input.animals, input.nameList)).toStrictEqual(output);
+    expect(dataHandling.filterAnimalsByNames(input.dataList, input.nameList)).toStrictEqual(output);
 });
 
-test('If a list of filters in entry of the function works with at least one of the different objects of the mock, the function will return a custom object', () => {
+test('Given the nameList has two matching filters, when we filter "animals" with nameList, the output list will be equal to a filtered "animals" list (with the two filters)', () => {
     const input = {
-        animals: dataTest,
+        dataList: [...data],
         nameList: ['ry', 'Do']
     }
 
@@ -50,20 +59,20 @@ test('If a list of filters in entry of the function works with at least one of t
         }]
     }]
 
-    expect(dataHandling.filterAnimalsByNames(input.animals, input.nameList)).toStrictEqual(output);
+    expect(dataHandling.filterAnimalsByNames(input.dataList, input.nameList)).toStrictEqual(output);
 });
 
-test('If the filter in entry of the function doesn t work with any of the different objects of the mock, the function will return an empty string', () => {
+test('Given the nameList has a not matching filter, when we filter "animals" with nameList, the output list will be equal to an empty array', () => {
     const input = {
-        animals: dataTest,
+        dataList: [...data],
         nameList: ['test']
     }
 
-    expect(dataHandling.filterAnimalsByNames(input.animals, input.nameList)).toStrictEqual([]);
+    expect(dataHandling.filterAnimalsByNames(input.dataList, input.nameList)).toStrictEqual([]);
 });
 
 // Function childrenCount(animals) 
-test('With an array, following a define schema, the function will display the same array with the count of chlidren in the "name" field', () => {
+test('Given we have a matching array as an input, when we execute the counting function, the output list will be equal to "animals" with the children count', () => {
     const input = [{
         name: 'Satanwi',
         people: [{
@@ -117,32 +126,4 @@ test('With an array, following a define schema, the function will display the sa
     }]
 
     expect(dataHandling.childrenCount(input)).toStrictEqual(output);
-});
-
-// Function filterAnimalsByNames(animals, nameList) + childrenCount(animals) 
-test('With a list, following a define schema, and after the function processing, a filtered list with children count will be returned (case with one filter)', () => {
-    const input = {
-        animals: dataTest,
-        nameList: ['ry']
-    }
-
-    const output = [{
-        "name": "Uzuzozne [1]",
-        "people": [{
-            "name": "Lillie Abbott [1]",
-            "animals": [
-                { "name": "John Dory" }
-            ]
-        }]
-    }, {
-        "name": "Satanwi [1]",
-        "people": [{
-            "name": "Anthony Bruno [1]",
-            "animals": [
-                { "name": "Oryx" }
-            ]
-        }]
-    }]
-
-    expect(dataHandling.childrenCount(dataHandling.filterAnimalsByNames(input.animals, input.nameList))).toStrictEqual(output);
 });
