@@ -1,13 +1,11 @@
 const dataHandling = require('./dataHandling')
 
 /**
- * This function will check the arguments passed during the execution and will execute the targeted function.
- * @param {Array} listToAnalyze - List of data to analyze
+ * This function will parse the list of arguments in order to use it for the function execution.
  * @param {Array} argumentList - List of the arguments, passed during the app.js execution
  */
-function parseArgs(listToAnalyze, argumentList) {
-    let result = listToAnalyze,
-        count = false;
+function parseArgs(argumentList) {
+    let count = false;
 
     const [_, __, ...args] = argumentList;
     const nameFilters = args.map(argument => {
@@ -23,11 +21,7 @@ function parseArgs(listToAnalyze, argumentList) {
         }
     });
 
-    nameFilters.forEach(nameFilter => {
-        result = dataHandling.filterAnimalsByNames(result, nameFilter);
-    })
-    if (count === true) { result = dataHandling.childrenCount(result); }
-    return result;
+    return { nameFilters: nameFilters, count: count }
 }
 
 module.exports = {

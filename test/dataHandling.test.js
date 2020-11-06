@@ -4,11 +4,11 @@ const dataHandling = require('./../scripts/dataHandling');
 
 const dataTest = data.data;
 
-// Function filterAnimalsByNames(arrayToFilter, filterString)
+// Function filterAnimalsByNames(animals, name)
 test('If the filter in entry of the function works with at least one of the different objects of the mock, the function will return a custom object', () => {
     const input = {
-        arrayToFilter: dataTest,
-        filterString: 'ry'
+        animals: dataTest,
+        name: 'ry'
     }
 
     const output = [{
@@ -31,15 +31,15 @@ test('If the filter in entry of the function works with at least one of the diff
         }
     ]
 
-    expect(dataHandling.filterAnimalsByNames(input.arrayToFilter, input.filterString)).toStrictEqual(output);
+    expect(dataHandling.filterAnimalsByNames(input.animals, input.name)).toStrictEqual(output);
 });
 test('If the filter in entry of the function doesn t work with any of the different objects of the mock, the function will return an empty string', () => {
     const input = {
-        arrayToFilter: dataTest,
-        filterString: 'test'
+        animals: dataTest,
+        name: 'test'
     }
 
-    expect(dataHandling.filterAnimalsByNames(input.arrayToFilter, input.filterString)).toStrictEqual([]);
+    expect(dataHandling.filterAnimalsByNames(input.animals, input.name)).toStrictEqual([]);
 });
 
 // Function childrenCount(animals) 
@@ -97,4 +97,32 @@ test('With an array, following a define schema, the function will display the sa
     }]
 
     expect(dataHandling.childrenCount(input)).toStrictEqual(output);
+});
+
+// Function filterAnimalsByNames(animals, name) + childrenCount(animals) 
+test('With a list, following a define schema, and after the function processing, a filtered list with children count will be returned ', () => {
+    const input = {
+        animals: dataTest,
+        name: 'ry'
+    }
+
+    const output = [{
+        "name": "Uzuzozne [1]",
+        "people": [{
+            "name": "Lillie Abbott [1]",
+            "animals": [
+                { "name": "John Dory" }
+            ]
+        }]
+    }, {
+        "name": "Satanwi [1]",
+        "people": [{
+            "name": "Anthony Bruno [1]",
+            "animals": [
+                { "name": "Oryx" }
+            ]
+        }]
+    }]
+
+    expect(dataHandling.childrenCount(dataHandling.filterAnimalsByNames(input.animals, input.name))).toStrictEqual(output);
 });
