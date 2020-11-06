@@ -42,7 +42,7 @@ test('If the filter in entry of the function doesn t work with any of the differ
     expect(dataHandling.arrayFiltering(input.arrayToFilter, input.filterString)).toStrictEqual([]);
 });
 
-// Function childrenCount(arrayToAnalyze)
+// Function childrenCount(arrayToAnalyze) 
 test('With an array, following a define schema, the function will display the same array with the count of chlidren in the "name" field', () => {
     const input = [{
         name: 'Satanwi',
