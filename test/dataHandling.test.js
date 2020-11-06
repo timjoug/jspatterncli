@@ -4,7 +4,7 @@ const dataHandling = require('./../scripts/dataHandling');
 
 const dataTest = data.data;
 
-// Function arrayFiltering(arrayToFilter, filterString)
+// Function filterAnimalsByNames(arrayToFilter, filterString)
 test('If the filter in entry of the function works with at least one of the different objects of the mock, the function will return a custom object', () => {
     const input = {
         arrayToFilter: dataTest,
@@ -31,7 +31,7 @@ test('If the filter in entry of the function works with at least one of the diff
         }
     ]
 
-    expect(dataHandling.arrayFiltering(input.arrayToFilter, input.filterString)).toStrictEqual(output);
+    expect(dataHandling.filterAnimalsByNames(input.arrayToFilter, input.filterString)).toStrictEqual(output);
 });
 test('If the filter in entry of the function doesn t work with any of the different objects of the mock, the function will return an empty string', () => {
     const input = {
@@ -39,10 +39,10 @@ test('If the filter in entry of the function doesn t work with any of the differ
         filterString: 'test'
     }
 
-    expect(dataHandling.arrayFiltering(input.arrayToFilter, input.filterString)).toStrictEqual([]);
+    expect(dataHandling.filterAnimalsByNames(input.arrayToFilter, input.filterString)).toStrictEqual([]);
 });
 
-// Function childrenCount(arrayToAnalyze) 
+// Function childrenCount(animals) 
 test('With an array, following a define schema, the function will display the same array with the count of chlidren in the "name" field', () => {
     const input = [{
         name: 'Satanwi',

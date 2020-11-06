@@ -2,32 +2,34 @@ const dataHandling = require('./dataHandling')
 
 /**
  * This function will check the arguments passed during the execution and will execute the targeted function.
- * @param {Array} dataToAnalyze - Array of data to analyze
+ * @param {Array} listToAnalyze - List of data to analyze
  * @param {Array} argumentList - List of the arguments, passed during the app.js execution
  */
-function functionRouter(dataToAnalyze, argumentList) {
-    let result = dataToAnalyze,
-        filterString = [],
-        filterBoolean = false,
-        countBoolean = false;
-    argumentList.map(argument => {
-        if (argument.includes('--filter=')) {
-            filterString.push(argument.substring(9));
-            filterBoolean = true;
-        }
+function parseArgs(listToAnalyze, argumentList) {
+    let result = listToAnalyze,
+        count = false;
+
+    const [_, __, ...args] = argumentList;
+    const nameFilters = args.map(argument => {
+            if (argument.includes('--filter=')) {
+                return argument.substring(9)
+            }
+        })
+        .filter(Boolean)
+
+    args.forEach(argument => {
         if (argument.includes('--count')) {
-            countBoolean = true;
+            count = true;
         }
     });
-    if (filterBoolean === true) {
-        filterString.map(process => {
-            result = dataHandling.arrayFiltering(result, process);
-        })
-    }
-    if (countBoolean === true) { result = dataHandling.childrenCount(result); }
+
+    nameFilters.forEach(nameFilter => {
+        result = dataHandling.filterAnimalsByNames(result, nameFilter);
+    })
+    if (count === true) { result = dataHandling.childrenCount(result); }
     return result;
 }
 
 module.exports = {
-    functionRouter
+    parseArgs
 }

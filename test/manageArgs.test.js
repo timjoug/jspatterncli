@@ -4,22 +4,22 @@ const manageArgs = require('./../scripts/manageArgs');
 
 const dataTest = data.data;
 
-// Function functionRouter(dataToAnalyze, argumentList)
+// Function parseArgs(listToAnalyze, argumentList)
 test('With an empty argument list, the function will return the entire data array', () => {
     const input = {
-        dataToAnalyze: dataTest,
+        listToAnalyze: dataTest,
         argumentList: []
     }
 
     const output = dataTest
 
-    expect(manageArgs.functionRouter(input.dataToAnalyze, input.argumentList)).toStrictEqual(output);
+    expect(manageArgs.parseArgs(input.listToAnalyze, input.argumentList)).toStrictEqual(output);
 });
 
 test('With a single filter argument (--filter=ry), the function will return an array, filtered with the input string (ry)', () => {
     const input = {
-        dataToAnalyze: dataTest,
-        argumentList: ['--filter=ry']
+        listToAnalyze: dataTest,
+        argumentList: ['node', 'app.js', '--filter=ry']
     }
 
     const output = [{
@@ -42,13 +42,13 @@ test('With a single filter argument (--filter=ry), the function will return an a
         }
     ];
 
-    expect(manageArgs.functionRouter(input.dataToAnalyze, input.argumentList)).toStrictEqual(output);
+    expect(manageArgs.parseArgs(input.listToAnalyze, input.argumentList)).toStrictEqual(output);
 });
 
 test('With two filter arguments (--filter=ry and --filter=Do), the function will return an array, filtered with the input strings (ry and Do)', () => {
     const input = {
-        dataToAnalyze: dataTest,
-        argumentList: ['--filter=ry', '--filter=Do']
+        listToAnalyze: dataTest,
+        argumentList: ['node', 'app.js', '--filter=ry', '--filter=Do']
     }
 
     const output = [{
@@ -61,13 +61,13 @@ test('With two filter arguments (--filter=ry and --filter=Do), the function will
         }]
     }];
 
-    expect(manageArgs.functionRouter(input.dataToAnalyze, input.argumentList)).toStrictEqual(output);
+    expect(manageArgs.parseArgs(input.listToAnalyze, input.argumentList)).toStrictEqual(output);
 });
 
 test('With a single filter argument (--filter=ry) and a count argument, the function will return an array, filtered with the input string (ry). This array will also include the count of children', () => {
     const input = {
-        dataToAnalyze: dataTest,
-        argumentList: ['--filter=ry', '--count']
+        listToAnalyze: dataTest,
+        argumentList: ['node', 'app.js', '--filter=ry', '--count']
     }
 
     const output = [{
@@ -90,5 +90,5 @@ test('With a single filter argument (--filter=ry) and a count argument, the func
         }
     ];
 
-    expect(manageArgs.functionRouter(input.dataToAnalyze, input.argumentList)).toStrictEqual(output);
+    expect(manageArgs.parseArgs(input.listToAnalyze, input.argumentList)).toStrictEqual(output);
 });

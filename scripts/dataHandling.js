@@ -1,43 +1,43 @@
 /**
  * This function will generate the result, filtered with an filter input and the target to filter.
- * @param {String} arrayToFilter - Array of Object to filter
- * @param {String} filterString - Substring to check
+ * @param {Array} animals - List of Object to filter
+ * @param {String} name - Substring to check
  */
 
-function arrayFiltering(arrayToFilter, filterString) {
-    let filteredArray = arrayToFilter.filter(country => country.people.some(people => people.animals.some(animal => animal.name.includes(filterString))));
+function filterAnimalsByNames(animals, name) {
+    let filteredList = animals.filter(country => country.people.some(people => people.animals.some(animal => animal.name.includes(name))));
 
-    filteredArray.map(country => {
+    filteredList.map(country => {
 
-        let filteredPeople = country.people.filter(people => people.animals.some(animal => animal.name.includes(filterString)));
+        let filteredPeople = country.people.filter(people => people.animals.some(animal => animal.name.includes(name)));
         country.people = filteredPeople;
 
         filteredPeople.map(people => {
-            let filteredAnimals = people.animals.filter(animal => animal.name.includes(filterString));
+            let filteredAnimals = people.animals.filter(animal => animal.name.includes(name));
             people.animals = filteredAnimals;
         })
 
     })
 
-    return filteredArray
+    return filteredList
 }
 
 /**
  * This function will add the count of the differents children arrays of the targeted array.
- * @param {String} arrayToAnalyze - Array of Object to count
+ * @param {Array} animals - List of Object to count
  */
-function childrenCount(arrayToAnalyze) {
-    arrayToAnalyze.map(country => {
+function childrenCount(animals) {
+    animals.map(country => {
         country.name = country.name.concat(' [', country.people.length, ']');
         country.people.map(people => {
             people.name = people.name.concat(' [', people.animals.length, ']');
         })
     });
 
-    return arrayToAnalyze;
+    return animals;
 }
 
 module.exports = {
     childrenCount,
-    arrayFiltering
+    filterAnimalsByNames
 }
