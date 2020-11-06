@@ -1,20 +1,26 @@
 /**
  * This function will generate the result, filtered with an filter input and the target to filter.
  * @param {Array} animals - List of Object to filter
- * @param {String} name - Substring to check
+ * @param {Array} nameList - Substring to check
  */
 
-function filterAnimalsByNames(animals, name) {
-    let filteredList = animals.filter(country => country.people.some(people => people.animals.some(animal => animal.name.includes(name))));
+function filterAnimalsByNames(animals, nameList) {
+    let filteredList = animals;
 
-    filteredList.map(country => {
+    nameList.forEach(name => {
 
-        let filteredPeople = country.people.filter(people => people.animals.some(animal => animal.name.includes(name)));
-        country.people = filteredPeople;
+        filteredList = filteredList.filter(country => country.people.some(people => people.animals.some(animal => animal.name.includes(name))));
 
-        filteredPeople.map(people => {
-            let filteredAnimals = people.animals.filter(animal => animal.name.includes(name));
-            people.animals = filteredAnimals;
+        filteredList.map(country => {
+
+            let filteredPeople = country.people.filter(people => people.animals.some(animal => animal.name.includes(name)));
+            country.people = filteredPeople;
+
+            filteredPeople.map(people => {
+                let filteredAnimals = people.animals.filter(animal => animal.name.includes(name));
+                people.animals = filteredAnimals;
+            })
+
         })
 
     })
