@@ -7,12 +7,12 @@
 function arrayFiltering(arrayToFilter, filterString) {
     let filteredArray = arrayToFilter.filter(country => country.people.some(people => people.animals.some(animal => animal.name.includes(filterString))));
 
-    filteredArray.forEach(country => {
+    filteredArray.map(country => {
 
         let filteredPeople = country.people.filter(people => people.animals.some(animal => animal.name.includes(filterString)));
         country.people = filteredPeople;
 
-        filteredPeople.forEach(people => {
+        filteredPeople.map(people => {
             let filteredAnimals = people.animals.filter(animal => animal.name.includes(filterString));
             people.animals = filteredAnimals;
         })
@@ -27,12 +27,13 @@ function arrayFiltering(arrayToFilter, filterString) {
  * @param {String} arrayToAnalyze - Array of Object to count
  */
 function childrenCount(arrayToAnalyze) {
-    arrayToAnalyze.forEach(country => {
+    arrayToAnalyze.map(country => {
         country.name = country.name.concat(' [', country.people.length, ']');
-        country.people.forEach(people => {
+        country.people.map(people => {
             people.name = people.name.concat(' [', people.animals.length, ']');
         })
-    })
+    });
+
     return arrayToAnalyze;
 }
 

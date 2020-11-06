@@ -10,7 +10,7 @@ function functionRouter(dataToAnalyze, argumentList) {
         filterString = [],
         filterBoolean = false,
         countBoolean = false;
-    argumentList.forEach(argument => {
+    argumentList.map(argument => {
         if (argument.includes('--filter=')) {
             filterString.push(argument.substring(9));
             filterBoolean = true;
@@ -20,7 +20,7 @@ function functionRouter(dataToAnalyze, argumentList) {
         }
     });
     if (filterBoolean === true) {
-        filterString.forEach(process => {
+        filterString.map(process => {
             result = dataHandling.arrayFiltering(result, process);
         })
     }
