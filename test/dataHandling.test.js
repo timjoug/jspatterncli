@@ -2,7 +2,7 @@ const { data } = require('../data');
 
 const dataHandling = require('./../scripts/dataHandling');
 
-// Function filterAnimalsByNames(animals, nameList)
+// Function filterDataByAnimalNames(animals, nameList)
 test('Given the nameList is empty, when we filter "animals" with nameList, the output list will be equal to "animals"', () => {
     const input = {
         dataList: [...data],
@@ -11,7 +11,7 @@ test('Given the nameList is empty, when we filter "animals" with nameList, the o
 
     const output = [...data]
 
-    expect(dataHandling.filterAnimalsByNames(input.dataList, input.nameList)).toStrictEqual(output);
+    expect(dataHandling.filterDataByAnimalNames(input.dataList, input.nameList)).toStrictEqual(output);
 });
 
 test('Given the nameList has one matching filter, when we filter "animals" with nameList, the output list will be equal to a filtered "animals" list', () => {
@@ -40,7 +40,7 @@ test('Given the nameList has one matching filter, when we filter "animals" with 
         }
     ]
 
-    expect(dataHandling.filterAnimalsByNames(input.dataList, input.nameList)).toStrictEqual(output);
+    expect(dataHandling.filterDataByAnimalNames(input.dataList, input.nameList)).toStrictEqual(output);
 });
 
 test('Given the nameList has two matching filters, when we filter "animals" with nameList, the output list will be equal to a filtered "animals" list (with the two filters)', () => {
@@ -59,7 +59,7 @@ test('Given the nameList has two matching filters, when we filter "animals" with
         }]
     }]
 
-    expect(dataHandling.filterAnimalsByNames(input.dataList, input.nameList)).toStrictEqual(output);
+    expect(dataHandling.filterDataByAnimalNames(input.dataList, input.nameList)).toStrictEqual(output);
 });
 
 test('Given the nameList has a not matching filter, when we filter "animals" with nameList, the output list will be equal to an empty array', () => {
@@ -68,7 +68,7 @@ test('Given the nameList has a not matching filter, when we filter "animals" wit
         nameList: ['test']
     }
 
-    expect(dataHandling.filterAnimalsByNames(input.dataList, input.nameList)).toStrictEqual([]);
+    expect(dataHandling.filterDataByAnimalNames(input.dataList, input.nameList)).toStrictEqual([]);
 });
 
 // Function childrenCount(animals) 

@@ -4,7 +4,7 @@ const dataHandling = require('./../scripts/dataHandling');
 
 const dataTest = data;
 
-// Function filterAnimalsByNames(dataList, nameList) + childrenCount(dataList) 
+// Function filterDataByAnimalNames(dataList, nameList) + childrenCount(dataList) 
 test('Given the nameList has one matching filter, when we filter "animals" with nameList and we use the count function, the output list will be equal to a filtered "animals" list with the children count', () => {
     const input = {
         dataList: [...data],
@@ -29,5 +29,5 @@ test('Given the nameList has one matching filter, when we filter "animals" with 
         }]
     }]
 
-    expect(dataHandling.childrenCount(dataHandling.filterAnimalsByNames(input.dataList, input.nameList))).toStrictEqual(output);
+    expect(dataHandling.childrenCount(dataHandling.filterDataByAnimalNames(input.dataList, input.nameList))).toStrictEqual(output);
 });

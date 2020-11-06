@@ -1,15 +1,13 @@
 # Jspatterncli
 
 ## Context
-Your job is to write a command-line interface in Node.js. 
-This program has to filter a list of elements containing a pattern.
+This program will filter a list of elements containing a defined pattern.
 
 In the following file `data.js`, there are `Countries` containing `Peoples` containing `Animals`.
 
 Sample of running the command and the expected output:
 
 ```bash
-# Only animals containing `ry` are displayed. The order should be kept intact
 
 $ node app.js --filter=ry
 [
@@ -31,8 +29,7 @@ $ node app.js --filter=ry
 ]
 ```
 
-`Bonus:`
-As a bonus point, the next goal is to count People and Animals by adding the count of children in the name, eg. Satanwi [2].
+The CLI also includes a function to count People and Animals by adding the count of children in the name, eg. Satanwi [2].
 
 Example:
 ```bash
@@ -55,12 +52,3 @@ node app.js --count
 ...
 ]
 ```
-
-## Requirements
-- The code must be available in a GIT repository
-- No library/modules should be used, except for the testing library
-
-## Appreciation
-- Code readability, structure and consistency
-- Tests, how they are written
-- Bonus: usage of Functional concepts

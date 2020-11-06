@@ -4,8 +4,7 @@
  * @param {Array} nameList - Substring to check
  */
 
-// renommer la fonction en filterDataByAnimalNames
-function filterAnimalsByNames(data, nameList) {
+function filterDataByAnimalNames(data, nameList) {
     let countries = [...data]; //Copie par valeur et non par référence
 
     nameList.forEach(name => {
@@ -46,5 +45,5 @@ function childrenCount(animals) {
 
 module.exports = {
     childrenCount,
-    filterAnimalsByNames
+    filterDataByAnimalNames
 }

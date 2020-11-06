@@ -4,7 +4,7 @@ const dataHandling = require('./scripts/dataHandling')
 
 const parsedArgs = manageArgs.parseArgs(process.argv);
 
-let result = dataHandling.filterAnimalsByNames(data, parsedArgs.nameFilters);
+let result = dataHandling.filterDataByAnimalNames(data, parsedArgs.nameFilters);
 
 if (parsedArgs.count === true) { result = dataHandling.childrenCount(result); }
 
